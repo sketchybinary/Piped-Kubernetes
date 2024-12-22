@@ -155,14 +155,17 @@ ingress:
   main:
     enabled: true
     primary: true
+    ingressClassName: tailscale
     hosts:
       - host: piped.video
         paths:
           - path: "/"
-    tls: []
+    tls:
+      - hosts:
+        - piped
 
   backend:
-    enabled: true
+    enabled: false
     ingressClassName: nginx
     primary: false
     hosts:
@@ -172,7 +175,7 @@ ingress:
     tls: []
 
   ytproxy:
-    enabled: true
+    enabled: false
     ingressClassName: nginx
     primary: false
     hosts:

@@ -29,6 +29,11 @@ metadata:
 spec:
  {{- if $values.ingressClassName }}
   ingressClassName: {{ $values.ingressClassName }}
+  defaultBackend:
+    service:
+      name: {{ $service }}
+      port:
+        number: {{ $port }}
   {{- end }}
   {{- if $values.tls }}
   tls:
@@ -42,8 +47,8 @@ spec:
       {{- end }}
     {{- end }}
   {{- end }}
-  rules:
-  {{- range $values.hosts }}
+  defaultBackend::
+{  {- range $values.hosts }}
     - host: {{ tpl .host $ | quote }}
       http:
         paths:
